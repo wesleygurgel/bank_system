@@ -28,7 +28,7 @@ class SubmitLoginView(View):
 
         if usuario is not None:
             login(request, usuario)
-            return redirect('/')
+            return redirect('/conta')
         else:
             messages.error(request, 'Credenciais estão incorretas!\nTente Novamente!')
             return redirect('/login')
@@ -44,3 +44,10 @@ class CadastrarContaView(TemplateView):
 
 class ContaView(TemplateView):
     template_name = 'conta.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ContaView, self).get_context_data(**kwargs)
+        context['contas'] = Conta.objects.filter(usuario=self.request.user)
+        print(context['contas'])
+        print(type(context['contas']))
+        return context

@@ -6,4 +6,4 @@ from .models import Conta
 
 @admin.register(Conta)
 class ContaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'proprietario', 'saldo', 'criados']
+    list_display = ['id', 'proprietario', 'saldo', 'criados', 'ativo']
