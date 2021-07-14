@@ -14,7 +14,6 @@ class Base(models.Model):
 
 
 class Conta(Base):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     proprietario = models.CharField('Proprietário', max_length=100)
     credito = models.DecimalField('Crédito', max_digits=3, decimal_places=2)
     saldo = models.FloatField(default=0.0)
@@ -23,7 +22,7 @@ class Conta(Base):
         verbose_name = 'Conta'
 
     def __str__(self):
-        return f'Conta: {self.usuario}\nProprietário: {self.proprietario}\nSaldo: {self.saldo}'
+        return f'Número da Conta:{self.id}\nProprietário: {self.proprietario}\nSaldo: {self.saldo}'
 
 
 
