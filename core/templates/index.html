@@ -1,20 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <!-- Hero Area Start -->
+    {% include 'hero.html' %}
+    <!-- Hero Area End -->
 
-    <!--====== SLIDER PART START ======-->
-        {% include 'slide.html' %}
-    <!--====== SLIDER PART ENDS ======-->
+    <!-- Header Area wrapper Starts -->
+        <!-- Dentro do Hero -->
+    <!-- Header Area wrapper End -->
 
-    <!--====== SERVICES TWO PART START ======-->
-        {% include 'services.html' %}
-    <!--====== SERVICES TWO PART ENDS ======-->
+    <!-- Services Section Start -->
+    {% include 'services.html' %}
+    <!-- Services Section End -->
 
-    <!--====== CONTACT PART START ======-->
-        {% include 'contato.html' %}
-    <!--====== CONTACT PART ENDS ======-->
+    <!-- Team Section Start -->
+    {% include 'team.html' %}
+    <!-- Team Section End -->
 
-    <!--====== FOOTER PART START ======-->
-        {% include 'footer.html' %}
-    <!--====== FOOTER PART ENDS ======-->
-    {% endblock%}
+    <!-- Contact Section Start -->
+    {% include 'contato.html' %}
+    <!-- Contact Section End -->
+
+    <!-- Footer Section Start -->
+    {% include 'footer.html' %}
+    <!-- Footer Section End -->
+{% endblock %}
