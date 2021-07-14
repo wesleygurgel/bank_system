@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import authenticate, login
+from django.urls import reverse_lazy
+from .models import Conta
+from django.contrib import messages
 
 
 # Create your views here.
@@ -26,10 +29,17 @@ class SubmitLoginView(View):
         if usuario is not None:
             login(request, usuario)
             return redirect('/')
+        else:
+            messages.error(request, 'Credenciais estão incorretas!\nTente Novamente!')
+            return redirect('/login')
 
     def get(self, request):
         print('Estou no GET')
         redirect('/')
+
+
+class CadastrarContaView(TemplateView):
+    template_name = 'cadastrar.html'
 
 
 class ContaView(TemplateView):
