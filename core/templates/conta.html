@@ -7,6 +7,9 @@
         <div class="section-header text-center">
             <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Detalhes da(s) Conta(s)</h2>
             <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+            <div class="container" align="center">
+                <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova Conta</button>
+            </div>
         </div>
         <div class="row">
             {% for conta in contas %}

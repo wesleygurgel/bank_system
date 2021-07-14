@@ -13,8 +13,12 @@ class IndexView(TemplateView):
     template_name = 'index.html'
 
 
-class LoginView(TemplateView):
-    template_name = 'login.html'
+class LoginView(View):
+    def get(self, request, *args, **kwargs):
+        if str(request.user) == 'AnonymousUser':
+            return render(request, 'login.html')
+        else:
+            return redirect('/conta/')
 
 
 class SubmitLoginView(View):
@@ -35,7 +39,7 @@ class SubmitLoginView(View):
 
     def get(self, request):
         print('Estou no GET')
-        redirect('/')
+        return redirect('/')
 
 
 class CadastrarContaView(TemplateView):

@@ -25,9 +25,10 @@ class Conta(Base):
     def __str__(self):
         return f'Número da Conta:{self.id}\nProprietário: {self.proprietario}\nSaldo: {self.saldo}'
 
-
-
-
-
+    def transferir(self, destino, valor):
+        conta_destino = Conta.objects.get(id=destino)
+        print(conta_destino)
+        self.saldo -= valor
+        destino.saldo += valor
 
 
