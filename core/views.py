@@ -65,7 +65,13 @@ class SubmitCadastrarContaView(FormView):
     def form_invalid(self, form, *args, **kwargs):
         print('Form invalid!')
         return super(SubmitCadastrarContaView, self).form_invalid(form, *args, **kwargs)
-        
+
+
+class AlterarContaView(View):
+    def get(self, request, *args, **kwargs):
+        print(self.kwargs['id_conta'])
+        return render(request, 'alterar_cadastro.html')
+
 
 class ContaView(TemplateView):
     template_name = 'conta.html'
