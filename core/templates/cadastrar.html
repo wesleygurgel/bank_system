@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<br><br><br>
+<div class="container" align="center">
+
+    <form id="form_conta" method="POST" action="{% url 'cadastrar_submit' %}">
+
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Usuário</label>
+            <select class="form-control" id="usuario" name="usuario">
+                {% for usuario in usuarios %}
+                <option>{{ usuario }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Proprietário da conta</label>
+            <input type="text" class="form-control" name="proprietario" id="proprietario" placeholder="João Batista">
+        </div>
+
+
+        <div class="form-group">
+            <label>Crédito</label>
+            <input type="number" class="form-control" name="credito" id="credito" placeholder="300">
+        </div>
+
+        <div class="form-group">
+            <label>Saldo</label>
+            <input type="number" class="form-control" name="saldo" id="saldo" placeholder="1000">
+        </div>
+
+        <button class="btn btn-common" type="submit">Criar Conta</button>
+    </form>
+
+</div>
+
+
+{% endblock %}

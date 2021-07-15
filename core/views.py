@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView, FormView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
 from .models import Conta
+from .forms import CadastrarForm
 from django.contrib import messages
 
 
@@ -24,9 +25,7 @@ class LoginView(View):
 class SubmitLoginView(View):
     def post(self, request):
         username = request.POST.get('username')
-        print(username)
         password = request.POST.get('password')
-        print(password)
 
         usuario = authenticate(username=username, password=password)
 
@@ -42,16 +41,36 @@ class SubmitLoginView(View):
         return redirect('/')
 
 
-class CadastrarContaView(TemplateView):
-    template_name = 'cadastrar.html'
+class CadastrarContaView(View):
+    def get(self, request):
+        if str(request.user) != 'AnonymousUser':
+            User = get_user_model()
+            context = {'usuarios': User.objects.all()}
+            return render(request, 'cadastrar.html', context)
+        else:
+            return redirect('/login')
 
+
+class SubmitCadastrarContaView(FormView):
+    template_name = 'cadastrar.html'
+    form_class = CadastrarForm
+    success_url = reverse_lazy('conta')
+
+    def form_valid(self, form, *args, **kwargs):
+        form.criar_conta()
+        messages.success(self.request, 'Conta cadastrada com sucesso!')
+        print('Form Valid!')
+        return super(SubmitCadastrarContaView, self).form_valid(form, *args, **kwargs)
+
+    def form_invalid(self, form, *args, **kwargs):
+        print('Form invalid!')
+        return super(SubmitCadastrarContaView, self).form_invalid(form, *args, **kwargs)
+        
 
 class ContaView(TemplateView):
     template_name = 'conta.html'
 
     def get_context_data(self, **kwargs):
         context = super(ContaView, self).get_context_data(**kwargs)
-        context['contas'] = Conta.objects.filter(usuario=self.request.user)
-        print(context['contas'])
-        print(type(context['contas']))
+        context['contas'] = Conta.objects.filter(usuario=self.request.user).order_by('id')
         return context
