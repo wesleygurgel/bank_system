@@ -7,6 +7,7 @@ from .models import Conta
 class CadastrarForm(forms.Form):
     Usuario = get_user_model()
     usuarios = []
+
     for user in Usuario.objects.all():
         usuario_tuple = (str(user), str(user))
         usuarios.insert(0, usuario_tuple)
