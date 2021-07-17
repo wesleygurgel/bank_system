@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, FormView
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
 from .models import Conta
-from .forms import CadastrarForm
+from .forms import CadastrarForm, DepositoForm
 from django.contrib import messages
 
 
@@ -67,6 +67,28 @@ class SubmitCadastrarContaView(FormView):
         print(form)
         messages.error(self.request, 'Formulário Inválido, tente novamente!')
         return super(SubmitCadastrarContaView, self).form_invalid(form, *args, **kwargs)
+
+
+class DepositarContaView(View):
+    def get(self, request, *args, **kwargs):
+        context = {'conta': Conta.objects.get(id=self.kwargs['id_conta'])}
+        return render(request, 'depositar.html', context)
+
+
+class SubmitDepositarContaView(FormView):
+    template_name = 'depositar.html'
+    form_class = DepositoForm
+    success_url = reverse_lazy('conta')
+
+    def form_valid(self, form, *args, **kwargs):
+        conta = Conta.objects.get(id=self.kwargs['id_conta'])
+        form.realizar_deposito(conta)
+        messages.success(self.request, 'Depósito Realizado com Sucesso!')
+        return super(SubmitDepositarContaView, self).form_valid(form, *args, **kwargs)
+
+    def form_invalid(self, form, *args, **kwargs):
+        messages.error(self.request, 'Depósito não pode ser realizado, tente novamente!')
+        return super(SubmitDepositarContaView, self).form_invalid(form, *args, **kwargs)
 
 
 class AlterarContaView(View):

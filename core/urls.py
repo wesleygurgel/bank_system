@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import IndexView, LoginView, ContaView, SubmitLoginView, CadastrarContaView, SubmitCadastrarContaView, \
-    AlterarContaView, DeletarContaView
+    AlterarContaView, DeletarContaView, DepositarContaView, SubmitDepositarContaView
 from django.contrib.auth.decorators import login_required
 
 
@@ -13,4 +13,6 @@ urlpatterns = [
     path('conta/cadastrar/submit', SubmitCadastrarContaView.as_view(), name='cadastrar_submit'),
     path('conta/alterar/<int:id_conta>/', AlterarContaView.as_view(), name='alterar_conta'),
     path('conta/alterar/deletar/<int:id_conta>/', DeletarContaView.as_view(), name='deletar_conta'),
+    path('conta/depositar/<int:id_conta>/', DepositarContaView.as_view(), name='depositar'),
+    path('conta/depositar/<int:id_conta>/submit', SubmitDepositarContaView.as_view(), name='depositar_submit'),
 ]

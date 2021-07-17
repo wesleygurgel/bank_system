@@ -23,5 +23,17 @@ class CadastrarForm(forms.Form):
         credito = self.cleaned_data['credito']
         saldo = self.cleaned_data['saldo']
 
-
         Conta.objects.create(usuario=usuario, proprietario=proprietario, credito=credito, saldo=saldo)
+
+
+class DepositoForm(forms.Form):
+    valor = forms.FloatField(label='Valor')
+
+    def realizar_deposito(self, conta):
+        valor = self.cleaned_data['valor']
+        print(f'Saldo Antigo: {conta.saldo}')
+        conta.saldo += valor
+        print(f'Saldo Novo: {conta.saldo}')
+        conta.save()
+
+
