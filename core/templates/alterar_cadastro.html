@@ -22,7 +22,7 @@
             <div class="container" align="center">
                 <button class="btn btn-common" onclick="window.location.href='{% url 'conta' %}'">Transferir Dinheiro
                 </button>
-                <button class="btn btn-common" onclick="window.location.href='{% url 'conta' %}'">Realizar Depósito
+                <button class="btn btn-common" onclick="window.location.href='{% url 'depositar' id_conta=conta.id %}'">Realizar Depósito
                 </button>
                 <button class="btn btn-common" onclick="window.location.href='{% url 'deletar_conta' id_conta=conta.id %}'">Deletar Conta
                 </button>
