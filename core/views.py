@@ -64,8 +64,29 @@ class SubmitCadastrarContaView(FormView):
 
     def form_invalid(self, form, *args, **kwargs):
         print('Form invalid!')
+        print(form)
+        messages.error(self.request, 'Formulário Inválido, tente novamente!')
         return super(SubmitCadastrarContaView, self).form_invalid(form, *args, **kwargs)
-        
+
+
+class AlterarContaView(View):
+    def get(self, request, *args, **kwargs):
+        print(self.kwargs['id_conta'])
+        context = {'conta': Conta.objects.get(id=self.kwargs['id_conta'])}
+        print(context['conta'])
+        return render(request, 'alterar_cadastro.html', context)
+
+
+class DeletarContaView(View):
+    def get(self, request, *args, **kwargs):
+        conta = Conta.objects.get(id=self.kwargs['id_conta'])
+        if request.user == conta.usuario:
+            messages.success(request, f'Conta de {str(conta.usuario).title()} foi removida com sucesso!')
+            conta.delete()
+        else:
+            messages.error(request, 'Não é possível deletar uma conta que você não é proprietario!')
+        return redirect('/conta/')
+
 
 class ContaView(TemplateView):
     template_name = 'conta.html'

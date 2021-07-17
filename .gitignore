@@ -13,3 +13,5 @@ template/*
 htmlcov/*
 
 bank_venv/*
+
+venv_bank/*

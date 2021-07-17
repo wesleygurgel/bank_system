@@ -43,7 +43,7 @@
                             <li>Crédito: R$ {{ conta.credito }}</li>
                             <li>Criada em: {{ conta.criados }}</li>
                         </ul>
-                        <button class="btn btn-common">Transferir dinheiro</button>
+                        <button class="btn btn-common" onclick="window.location.href='{% url 'alterar_conta' id_conta=conta.id %}'">Manage Account</button>
                     </div>
                 </div>
                 {% endif %}
