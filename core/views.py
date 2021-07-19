@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, FormView
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
 from .models import Conta
-from .forms import CadastrarForm, DepositoForm
+from .forms import CadastrarForm, DepositoForm, TransferirForm
 from django.contrib import messages
 
 
@@ -57,7 +57,8 @@ class SubmitCadastrarContaView(FormView):
     success_url = reverse_lazy('conta')
 
     def form_valid(self, form, *args, **kwargs):
-        form.criar_conta()
+        current_user = self.request.user
+        form.criar_conta(current_user.id)
         messages.success(self.request, 'Conta cadastrada com sucesso!')
         print('Form Valid!')
         return super(SubmitCadastrarContaView, self).form_valid(form, *args, **kwargs)
@@ -108,6 +109,18 @@ class DeletarContaView(View):
         else:
             messages.error(request, 'Não é possível deletar uma conta que você não é proprietario!')
         return redirect('/conta/')
+
+
+class TransferirView(FormView):
+    template_name = 'transferir.html'
+    form_class = TransferirForm
+    success_url = reverse_lazy('conta')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(TransferirView, self).get_context_data(**kwargs)
+        context['contas'] = Conta.objects.order_by('id').all()
+        context['conta_atual'] = self.kwargs['id_conta']
+        return context
 
 
 class ContaView(TemplateView):

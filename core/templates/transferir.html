@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Pricing section Start -->
+<section id="pricing" class="section-padding">
+
+    <div class="container">
+        {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{{ m.tags }}">
+            <button type="button" class="close" data-dismiss="alert"></button>
+            <strong>{{ m }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Detalhes da(s) Conta(s)</h2>
+            <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
+            <div class="container" align="center">
+                <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova Conta</button>
+            </div>
+        </div>
+        <div class="row">
+            {% for conta in contas %}
+                {% if conta.id == conta_atual %}
+
+                {% else %}
+                    {% if conta.ativo %}
+                    <div class="col-lg-4 col-md-6 col-xs-12">
+                        <div class="table wow fadeInRight" data-wow-delay="1.2s">
+                            <div class="icon-box">
+                                <i class="lni-star"></i>
+                            </div>
+                            <div class="pricing-header">
+                                <p>Número da Conta</p>
+                                <p class="price-value">{{ conta.id }}</p>
+                            </div>
+                            <div class="title">
+                                <h3>{{ conta.proprietario }}</h3>
+                            </div>
+                            <ul class="description">
+                                <li>Saldo: R$ {{ conta.saldo }}</li>
+                                <li>Crédito: R$ {{ conta.credito }}</li>
+                                <li>Criada em: {{ conta.criados }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- Pricing Table Section End -->
+
+
+{% include 'footer.html' %}
+{% endblock %}
+
