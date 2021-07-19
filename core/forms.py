@@ -5,12 +5,6 @@ from .models import Conta
 
 
 class CadastrarForm(forms.Form):
-    Usuario = get_user_model()
-    usuarios = []
-
-    for user in Usuario.objects.all():
-        usuario_tuple = (str(user), str(user))
-        usuarios.insert(0, usuario_tuple)
 
     proprietario = forms.CharField(label='Proprietário', max_length=100)
     credito = forms.DecimalField(label='Crédito')
