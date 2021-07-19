@@ -13,8 +13,8 @@ class CadastrarForm(forms.Form):
         usuarios.insert(0, usuario_tuple)
 
     proprietario = forms.CharField(label='Proprietário', max_length=100)
-    credito = forms.DecimalField(label='Crédito', max_digits=7, decimal_places=2)
-    saldo = forms.DecimalField(label='Saldo', decimal_places=2)
+    credito = forms.DecimalField(label='Crédito')
+    saldo = forms.DecimalField(label='Saldo')
 
     def criar_conta(self, user_id):
         usuario = User.objects.get(id=user_id)
@@ -38,6 +38,20 @@ class DepositoForm(forms.Form):
 
 
 class TransferirForm(forms.Form):
-    pass
+    numero_conta = forms.DecimalField(label='Numero da Conta')
+    valor_transferir = forms.FloatField(label='Valor')
+
+    def transferir(self, conta):
+        numero_conta = self.cleaned_data['numero_conta']
+        valor_transferir = self.cleaned_data['valor_transferir']
+        conta_destino = Conta.objects.get(id=numero_conta)
+
+        conta.saldo -= valor_transferir
+        conta_destino.saldo += valor_transferir
+
+        conta.save()
+        conta_destino.save()
+
+
 
 

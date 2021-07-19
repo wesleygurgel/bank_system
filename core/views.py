@@ -122,6 +122,16 @@ class TransferirView(FormView):
         context['conta_atual'] = self.kwargs['id_conta']
         return context
 
+    def form_valid(self, form, *args, **kwargs):
+        conta = Conta.objects.get(id=self.kwargs['id_conta'])
+        form.transferir(conta)
+        messages.success(self.request, 'Transferência Realizada com Sucesso!')
+        return super(TransferirView, self).form_valid(form, *args, **kwargs)
+
+    def form_invalid(self, form, *args, **kwargs):
+        messages.error(self.request, 'Transferência não pode ser realizada, tente novamente!')
+        return super(TransferirView, self).form_invalid(form, *args, **kwargs)
+
 
 class ContaView(TemplateView):
     template_name = 'conta.html'
