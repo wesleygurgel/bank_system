@@ -12,17 +12,17 @@ class CadastrarForm(forms.Form):
         usuario_tuple = (str(user), str(user))
         usuarios.insert(0, usuario_tuple)
 
-    usuario = forms.ChoiceField(choices=usuarios)
     proprietario = forms.CharField(label='Proprietário', max_length=100)
     credito = forms.DecimalField(label='Crédito', max_digits=7, decimal_places=2)
     saldo = forms.DecimalField(label='Saldo', decimal_places=2)
 
-    def criar_conta(self):
-        usuario = User.objects.get(username=self.cleaned_data['usuario'])
+    def criar_conta(self, user_id):
+        usuario = User.objects.get(id=user_id)
         proprietario = self.cleaned_data['proprietario']
         credito = self.cleaned_data['credito']
         saldo = self.cleaned_data['saldo']
 
+        print(f'Criando Conta para o login: {usuario}')
         Conta.objects.create(usuario=usuario, proprietario=proprietario, credito=credito, saldo=saldo)
 
 
@@ -35,5 +35,9 @@ class DepositoForm(forms.Form):
         conta.saldo += valor
         print(f'Saldo Novo: {conta.saldo}')
         conta.save()
+
+
+class TransferirForm(forms.Form):
+    pass
 
 
