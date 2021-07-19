@@ -20,7 +20,7 @@
             <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Seja bem-vindo {{ conta.proprietario }}</h2>
             <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
             <div class="container" align="center">
-                <button class="btn btn-common" onclick="window.location.href='{% url 'conta' %}'">Transferir Dinheiro
+                <button class="btn btn-common" onclick="window.location.href='{% url 'transferir' id_conta=conta.id %}'">Transferir Dinheiro
                 </button>
                 <button class="btn btn-common" onclick="window.location.href='{% url 'depositar' id_conta=conta.id %}'">Realizar Depósito
                 </button>

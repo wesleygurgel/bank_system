@@ -15,41 +15,62 @@
         {% endif %}
     </div>
 
+
     <div class="container">
         <div class="section-header text-center">
-            <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Detalhes da(s) Conta(s)</h2>
+            <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Realizar Transferência</h2>
             <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
-            <div class="container" align="center">
-                <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova Conta</button>
+        </div>
+
+        <form id="form_transferir" method="POST" action="{% url 'transferir' id_conta=conta_atual %}">
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Número Conta de Destino</label>
+                <input type="number" class="form-control" name="numero_conta" id="numero_conta" placeholder="1">
             </div>
+
+            <div class="form-group">
+                <label>Valor para Transferir</label>
+                <input type="number" class="form-control" name="valor_transferir" id="valor_transferir" placeholder="1000">
+            </div>
+
+            <button class="btn btn-common" type="submit">Transferir</button>
+        </form>
+    </div>
+    <br>
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Contas Disponíveis</h2>
+            <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
         </div>
         <div class="row">
             {% for conta in contas %}
-                {% if conta.id == conta_atual %}
+            {% if conta.id == conta_atual %}
 
-                {% else %}
-                    {% if conta.ativo %}
-                    <div class="col-lg-4 col-md-6 col-xs-12">
-                        <div class="table wow fadeInRight" data-wow-delay="1.2s">
-                            <div class="icon-box">
-                                <i class="lni-star"></i>
-                            </div>
-                            <div class="pricing-header">
-                                <p>Número da Conta</p>
-                                <p class="price-value">{{ conta.id }}</p>
-                            </div>
-                            <div class="title">
-                                <h3>{{ conta.proprietario }}</h3>
-                            </div>
-                            <ul class="description">
-                                <li>Saldo: R$ {{ conta.saldo }}</li>
-                                <li>Crédito: R$ {{ conta.credito }}</li>
-                                <li>Criada em: {{ conta.criados }}</li>
-                            </ul>
-                        </div>
+            {% else %}
+            {% if conta.ativo %}
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="table wow fadeInRight" data-wow-delay="1.2s">
+                    <div class="icon-box">
+                        <i class="lni-star"></i>
                     </div>
-                    {% endif %}
-                    {% endif %}
+                    <div class="pricing-header">
+                        <p>Número da Conta</p>
+                        <p class="price-value">{{ conta.id }}</p>
+                    </div>
+                    <div class="title">
+                        <h3>{{ conta.proprietario }}</h3>
+                    </div>
+                    <ul class="description">
+                        <li>Saldo: R$ {{ conta.saldo }}</li>
+                        <li>Crédito: R$ {{ conta.credito }}</li>
+                        <li>Criada em: {{ conta.criados }}</li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
             {% endfor %}
 
         </div>
