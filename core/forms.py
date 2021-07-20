@@ -14,7 +14,7 @@ class CadastrarForm(forms.Form):
         usuario = User.objects.get(id=user_id)
         proprietario = self.cleaned_data['proprietario']
         credito = self.cleaned_data['credito']
-        saldo = self.cleaned_data['saldo']
+        saldo = self.cleaned_data['saldo'] + credito
 
         print(f'Criando Conta para o login: {usuario}')
         Conta.objects.create(usuario=usuario, proprietario=proprietario, credito=credito, saldo=saldo)
