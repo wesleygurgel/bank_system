@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
     }
 }"""
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'bank_system',
@@ -91,11 +91,11 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
         'HOST': 'localhost',
         'PORT': '5432'
     }
-}"""
-
-DATABASES = {
-    'default': dj_database_url.config()
 }
+
+"""DATABASES = {
+    'default': dj_database_url.config()
+}"""
 
 
 # Password validation
