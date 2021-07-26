@@ -6,7 +6,7 @@ from .models import Conta, ContaBonus, ContaPoupanca
 
 @admin.register(Conta)
 class ContaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'proprietario', 'contabonus', 'contapoupanca', 'saldo', 'criados', 'ativo']
+    list_display = ['id', 'usuario', 'proprietario', 'contabonus', 'contapoupanca', 'saldo', 'criados', 'ativo']
     # list_display = [field.name for field in Conta._meta.get_fields()]
 
 

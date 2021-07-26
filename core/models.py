@@ -21,11 +21,20 @@ class Conta(Base):
     proprietario = models.CharField('Proprietário', max_length=100)
     credito = models.DecimalField('Crédito', max_digits=7, decimal_places=2)
     saldo = models.FloatField(default=0.0)
+    tipo = models.CharField('Tipo Conta', max_length=100)
 
     class Meta:
         verbose_name = 'Conta'
 
     def __str__(self):
+        if isinstance(self, ContaBonus):
+            print('BONUS')
+        elif isinstance(self, ContaPoupanca):
+            print('POUPANCA')
+        else:
+            print('nenhum')
+            print(type(self))
+
         return f'Número da Conta:{self.id}\nProprietário: {self.proprietario}\nSaldo: {self.saldo}'
 
     def transferir(self, destino, valor):
@@ -42,7 +51,7 @@ class ContaBonus(Conta):
         verbose_name = 'Conta Bônus'
 
     def __str__(self):
-        return str(self.pontuacao)
+        return str(self.id)
 
 
 class ContaPoupanca(Conta):
@@ -52,4 +61,4 @@ class ContaPoupanca(Conta):
         verbose_name = 'Conta Poupança'
 
     def __str__(self):
-        return str(self.taxa_juros)
+        return str(self.id)

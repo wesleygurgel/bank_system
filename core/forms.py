@@ -25,12 +25,12 @@ class CadastrarForm(forms.Form):
         print(f'Criando Conta para o login: {usuario}')
         if tipo_cleaned == 'Conta Bônus':
             ContaBonus.objects.create(usuario=usuario, proprietario=proprietario, pontuacao=10, credito=credito,
-                                      saldo=saldo)
+                                      saldo=saldo, tipo=tipo_cleaned)
             print('Conta Bônus criada!')
 
         else:
             ContaPoupanca.objects.create(usuario=usuario, proprietario=proprietario, taxa_juros=0, credito=credito,
-                                         saldo=saldo)
+                                         saldo=saldo, tipo=tipo_cleaned)
             print('Conta Poupança Criada!')
 
 
