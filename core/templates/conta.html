@@ -20,35 +20,44 @@
             <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Detalhes da(s) Conta(s)</h2>
             <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
             <div class="container" align="center">
-                <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova Conta</button>
+                <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova
+                    Conta
+                </button>
             </div>
         </div>
         <div class="row">
             {% for conta in contas %}
-                {% if conta.ativo %}
-                <div class="col-lg-4 col-md-6 col-xs-12">
-                    <div class="table wow fadeInRight" data-wow-delay="1.2s">
-                        <div class="icon-box">
-                            <i class="lni-star"></i>
-                        </div>
-                        <div class="pricing-header">
-                            <p><strong>{{ conta.tipo_conta }}</strong></p>
-                            <hr>
-                            <p>Número da Conta</p>
-                            <p class="price-value">{{ conta.id }}</p>
-                        </div>
-                        <div class="title">
-                            <h3>{{ conta.proprietario }}</h3>
-                        </div>
-                        <ul class="description">
-                            <li>Saldo: R$ {{ conta.saldo }}</li>
-                            <li>Crédito: R$ {{ conta.credito }}</li>
-                            <li>Criada em: {{ conta.criados }}</li>
-                        </ul>
-                        <button class="btn btn-common" onclick="window.location.href='{% url 'alterar_conta' id_conta=conta.id %}'">Manage Account</button>
+            {% if conta.ativo %}
+            <div class="col-lg-4 col-md-6 col-xs-12">
+                <div class="table wow fadeInRight" data-wow-delay="1.2s">
+                    <div class="icon-box">
+                        <i class="lni-star"></i>
                     </div>
+                    <div class="pricing-header">
+                        {% if conta.tipo == 'Conta Poupança' %}
+                        <p><strong>Conta Poupança</strong></p>
+                        {% else %}
+                        <p><strong>Conta Bônus</strong></p>
+                        {% endif %}
+
+                        <hr>
+                        <p>Número da Conta</p>
+                        <p class="price-value">{{ conta.id }}</p>
+                    </div>
+                    <div class="title">
+                        <h3>{{ conta.proprietario }}</h3>
+                    </div>
+                    <ul class="description">
+                        <li>Saldo: R$ {{ conta.saldo }}</li>
+                        <li>Crédito: R$ {{ conta.credito }}</li>
+                        <li>Criada em: {{ conta.criados }}</li>
+                    </ul>
+                    <button class="btn btn-common"
+                            onclick="window.location.href='{% url 'alterar_conta' id_conta=conta.id %}'">Manage Account
+                    </button>
                 </div>
-                {% endif %}
+            </div>
+            {% endif %}
             {% endfor %}
 
         </div>

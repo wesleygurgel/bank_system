@@ -17,11 +17,16 @@ class Base(models.Model):
 
 class Conta(Base):
 
+    CHOICES = (
+        ('Conta Bônus', 'Conta Bônus'),
+        ('Conta Poupança', 'Conta Poupança')
+    )
+
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     proprietario = models.CharField('Proprietário', max_length=100)
     credito = models.DecimalField('Crédito', max_digits=7, decimal_places=2)
     saldo = models.FloatField(default=0.0)
-    tipo = models.CharField('Tipo Conta', max_length=100)
+    tipo = models.CharField('Tipo de Conta', choices=CHOICES, max_length=20)
 
     class Meta:
         verbose_name = 'Conta'
