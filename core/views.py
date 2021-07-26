@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
-from .models import Conta
+from .models import Conta, ContaBonus, ContaPoupanca
 from .forms import CadastrarForm, DepositoForm, TransferirForm
 from django.contrib import messages
 
@@ -44,8 +44,7 @@ class SubmitLoginView(View):
 class CadastrarContaView(View):
     def get(self, request):
         if str(request.user) != 'AnonymousUser':
-            User = get_user_model()
-            context = {'usuarios': User.objects.all()}
+            context = {'tipos': ('Conta Bônus', 'Conta Poupança')}
             return render(request, 'cadastrar.html', context)
         else:
             return redirect('/login')

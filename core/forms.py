@@ -1,23 +1,37 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from .models import Conta
+from .models import ContaBonus, ContaPoupanca, Conta
 
 
 class CadastrarForm(forms.Form):
+    CHOICES = (
+        ('Conta Bônus', 'Conta Bônus'),
+        ('Conta Poupança', 'Conta Poupança')
+    )
 
     proprietario = forms.CharField(label='Proprietário', max_length=100)
+    tipo_conta = forms.ChoiceField(choices=CHOICES)
     credito = forms.DecimalField(label='Crédito')
     saldo = forms.DecimalField(label='Saldo')
 
     def criar_conta(self, user_id):
         usuario = User.objects.get(id=user_id)
         proprietario = self.cleaned_data['proprietario']
+        tipo_cleaned = self.cleaned_data['tipo_conta']
         credito = self.cleaned_data['credito']
         saldo = self.cleaned_data['saldo'] + credito
 
         print(f'Criando Conta para o login: {usuario}')
-        Conta.objects.create(usuario=usuario, proprietario=proprietario, credito=credito, saldo=saldo)
+        if tipo_cleaned == 'Conta Bônus':
+            ContaBonus.objects.create(usuario=usuario, proprietario=proprietario, pontuacao=10, credito=credito,
+                                      saldo=saldo)
+            print('Conta Bônus criada!')
+
+        else:
+            ContaPoupanca.objects.create(usuario=usuario, proprietario=proprietario, taxa_juros=0, credito=credito,
+                                         saldo=saldo)
+            print('Conta Poupança Criada!')
 
 
 class DepositoForm(forms.Form):
@@ -45,7 +59,3 @@ class TransferirForm(forms.Form):
 
         conta.save()
         conta_destino.save()
-
-
-
-

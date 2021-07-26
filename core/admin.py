@@ -1,14 +1,20 @@
 from django.contrib import admin
-from .models import Conta, TipoConta
+from .models import Conta, ContaBonus, ContaPoupanca
 
 
 # Register your models here.
 
 @admin.register(Conta)
 class ContaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'proprietario', 'saldo', 'criados', 'ativo']
+    list_display = ['id', 'proprietario', 'contabonus', 'contapoupanca', 'saldo', 'criados', 'ativo']
+    # list_display = [field.name for field in Conta._meta.get_fields()]
 
 
-@admin.register(TipoConta)
-class TipoContaAdmin(admin.ModelAdmin):
-    list_display = ['tipo_conta', 'criados', 'modificado', 'ativo']
+@admin.register(ContaBonus)
+class ContaBonusAdmin(admin.ModelAdmin):
+    list_display = ['id', 'proprietario', 'saldo', 'pontuacao', 'criados', 'ativo']
+
+
+@admin.register(ContaPoupanca)
+class ContaPoupancaAdmin(admin.ModelAdmin):
+    list_display = ['id', 'proprietario', 'saldo', 'taxa_juros', 'criados', 'ativo']
