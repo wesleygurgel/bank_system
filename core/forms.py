@@ -39,6 +39,13 @@ class DepositoForm(forms.Form):
 
     def realizar_deposito(self, conta):
         valor = self.cleaned_data['valor']
+        print(f'Valor depósito: {valor}')
+
+        if valor >= 100 and conta.tipo == "Conta Bônus":
+            pontuacao_encrease = valor // 100
+            conta.contabonus.pontuacao += int(pontuacao_encrease)
+            conta.contabonus.save()
+
         print(f'Saldo Antigo: {conta.saldo}')
         conta.saldo += valor
         print(f'Saldo Novo: {conta.saldo}')
@@ -53,6 +60,10 @@ class TransferirForm(forms.Form):
         numero_conta = self.cleaned_data['numero_conta']
         valor_transferir = self.cleaned_data['valor_transferir']
         conta_destino = Conta.objects.get(id=numero_conta)
+
+        if valor_transferir >= 200 and conta_destino.tipo == 'Conta Bônus':
+            conta_destino.contabonus.pontuacao += int(valor_transferir // 200)
+            conta_destino.contabonus.save()
 
         conta.saldo -= valor_transferir
         conta_destino.saldo += valor_transferir
