@@ -24,6 +24,10 @@
                 <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova
                     Conta
                 </button>
+                {% if contas %}
+                 <button class="btn btn-common" onclick="window.location.href='{% url 'renderjuros' %}'">Render Juros
+                </button>
+                {% endif %}
             </div>
         </div>
         <div class="row">
