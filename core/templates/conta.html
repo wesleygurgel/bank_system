@@ -50,6 +50,11 @@
                     <ul class="description">
                         <li>Saldo: R$ {{ conta.saldo }}</li>
                         <li>Crédito: R$ {{ conta.credito }}</li>
+                        {% if conta.tipo == 'Conta Poupança' %}
+                        <li>Taxa de Juros: {{ conta.contapoupanca.taxa_juros }}%</li>
+                        {% else %}
+                        <li>Pontuação: {{ conta.contabonus.pontuacao }}</li>
+                        {% endif %}
                         <li>Criada em: {{ conta.criados }}</li>
                     </ul>
                     <button class="btn btn-common"

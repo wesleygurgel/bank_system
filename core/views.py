@@ -138,7 +138,9 @@ class ContaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ContaView, self).get_context_data(**kwargs)
         context['contas'] = Conta.objects.filter(usuario=self.request.user).order_by('id')
-        for conta in context['contas']:
+        """for conta in context['contas']:
             # print(conta.saldo)
-            print(conta)
+            # print(conta)
+            if conta.tipo == "Conta Poupança":
+                print(conta.contapoupanca.taxa_juros)"""
         return context
