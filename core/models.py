@@ -32,14 +32,6 @@ class Conta(Base):
         verbose_name = 'Conta'
 
     def __str__(self):
-        if isinstance(self, ContaBonus):
-            print('BONUS')
-        elif isinstance(self, ContaPoupanca):
-            print('POUPANCA')
-        else:
-            print('nenhum')
-            print(type(self))
-
         return f'Número da Conta:{self.id}\nProprietário: {self.proprietario}\nSaldo: {self.saldo}'
 
     def transferir(self, destino, valor):
