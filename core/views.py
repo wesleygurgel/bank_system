@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, FormView
 from django.contrib.auth import authenticate, login, get_user_model
 from django.urls import reverse_lazy
 from .models import Conta, ContaBonus, ContaPoupanca
-from .forms import CadastrarForm, DepositoForm, TransferirForm
+from .forms import CadastrarForm, DepositoForm, TransferirForm, RenderJurosForm
 from django.contrib import messages
 
 
@@ -142,3 +142,19 @@ class ContaView(TemplateView):
             # print(conta.saldo)
             print(conta)"""
         return context
+
+
+class RenderJurosView(FormView):
+    template_name = 'render_juros.html'
+    form_class = RenderJurosForm
+    success_url = reverse_lazy('conta')
+
+    def form_valid(self, form, *args, **kwargs):
+        contas = Conta.objects.all()
+        form.atualizar_taxa_juros(contas)
+        messages.success(self.request, 'Taxa Juros atualizada com Sucesso!')
+        return super(RenderJurosView, self).form_valid(form, *args, **kwargs)
+
+    def form_invalid(self, form, *args, **kwargs):
+        messages.error(self.request, 'Taxa juros não pode ser atualizada, tente novamente! MAX-DIGITS = 2')
+        return super(RenderJurosView, self).form_invalid(form, *args, **kwargs)
