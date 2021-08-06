@@ -12,6 +12,15 @@
             <input type="text" class="form-control" name="proprietario" id="proprietario" placeholder="João Batista">
         </div>
 
+        <div class="form-group">
+            <label>Tipo de Conta</label>
+            <select class="form-control" id="tipo_conta" name="tipo_conta">
+                {% for tipo in tipos %}
+                <option>{{ tipo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
 
         <div class="form-group">
             <label>Crédito</label>
