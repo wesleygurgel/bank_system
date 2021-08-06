@@ -70,3 +70,13 @@ class TransferirForm(forms.Form):
 
         conta.save()
         conta_destino.save()
+
+
+class RenderJurosForm(forms.Form):
+    taxa_juros = forms.DecimalField(label='Taxa de Juros', max_digits=2)
+
+    def atualizar_taxa_juros(self, contas):
+        for conta in contas:
+            if conta.tipo == 'Conta Poupança':
+                conta.contapoupanca.taxa_juros = self.cleaned_data['taxa_juros']
+                conta.contapoupanca.save()

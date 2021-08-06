@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load core_extras %}
 
 {% block content %}
 <!-- Pricing section Start -->
@@ -23,6 +24,10 @@
                 <button class="btn btn-common" onclick="window.location.href='{% url 'cadastrar' %}'">Criar uma nova
                     Conta
                 </button>
+                {% if contas %}
+                 <button class="btn btn-common" onclick="window.location.href='{% url 'renderjuros' %}'">Render Juros
+                </button>
+                {% endif %}
             </div>
         </div>
         <div class="row">
@@ -52,8 +57,10 @@
                         <li>Crédito: R$ {{ conta.credito }}</li>
                         {% if conta.tipo == 'Conta Poupança' %}
                         <li>Taxa de Juros: {{ conta.contapoupanca.taxa_juros }}%</li>
+                        <li>Saldo Final: R$ {% saldo_final conta.saldo conta.contapoupanca.taxa_juros %}</li>
                         {% else %}
                         <li>Pontuação: {{ conta.contabonus.pontuacao }}</li>
+                        <li>-</li>
                         {% endif %}
                         <li>Criada em: {{ conta.criados }}</li>
                     </ul>
