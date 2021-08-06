@@ -41,8 +41,8 @@ class DepositoForm(forms.Form):
         valor = self.cleaned_data['valor']
         print(f'Valor depósito: {valor}')
 
-        if valor >= 100 and conta.tipo == "Conta Bônus":
-            pontuacao_encrease = valor // 100
+        if valor >= 150 and conta.tipo == "Conta Bônus":
+            pontuacao_encrease = valor // 150
             conta.contabonus.pontuacao += int(pontuacao_encrease)
             conta.contabonus.save()
 
