@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-et9r#^7#y=by&u#^4q^)#xtnnh#uxq075l0%p7lp!o$dhj76!t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
     }
 }"""
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'bank_system',
@@ -91,11 +91,11 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432'
     }
-}
-
-"""DATABASES = {
-    'default': dj_database_url.config()
 }"""
+
+DATABASES = {
+    'default': dj_database_url.config()
+}
 
 
 # Password validation
