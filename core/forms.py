@@ -61,6 +61,11 @@ class TransferirForm(forms.Form):
         valor_transferir = self.cleaned_data['valor_transferir']
         conta_destino = Conta.objects.get(id=numero_conta)
 
+        if conta.saldo - valor_transferir <= -1000 and conta.saldo < 0:
+            valor_transferir = conta.saldo + 1000
+        else:
+            valor_transferir = valor_transferir - conta.saldo
+
         if valor_transferir >= 200 and conta_destino.tipo == 'Conta Bônus':
             conta_destino.contabonus.pontuacao += int(valor_transferir // 200)
             conta_destino.contabonus.save()
