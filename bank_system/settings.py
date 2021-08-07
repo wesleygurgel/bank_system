@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-et9r#^7#y=by&u#^4q^)#xtnnh#uxq075l0%p7lp!o$dhj76!t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
     }
 }"""
 
-DATABASES = {
+"""DATABASES = {
     'default': dj_database_url.config()
-}
+}"""
 
 
 # Password validation
@@ -146,3 +146,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = 'index'
+
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
