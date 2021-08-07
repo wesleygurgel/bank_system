@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
     }
 }"""
 
-"""DATABASES = {
+DATABASES = {
     'default': dj_database_url.config()
-}"""
+}
 
 
 # Password validation
@@ -146,5 +146,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = 'index'
-
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
