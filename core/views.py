@@ -6,7 +6,6 @@ from django.urls import reverse_lazy
 from .models import Conta
 from .forms import CadastrarForm, DepositoForm, TransferirForm, RenderJurosForm
 from django.contrib import messages
-from files import find
 
 
 # Create your views here.
@@ -137,7 +136,6 @@ class ContaView(TemplateView):
     template_name = 'conta.html'
 
     def get_context_data(self, **kwargs):
-        find.main()
         context = super(ContaView, self).get_context_data(**kwargs)
         context['contas'] = Conta.objects.filter(usuario=self.request.user).order_by('id')
         """for conta in context['contas']:
