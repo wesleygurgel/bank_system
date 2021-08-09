@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView, FormView
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
-from .models import Conta, ContaBonus, ContaPoupanca
+from .models import Conta
 from .forms import CadastrarForm, DepositoForm, TransferirForm, RenderJurosForm
 from django.contrib import messages
+from files import find
 
 
 # Create your views here.
@@ -136,6 +137,7 @@ class ContaView(TemplateView):
     template_name = 'conta.html'
 
     def get_context_data(self, **kwargs):
+        find.main()
         context = super(ContaView, self).get_context_data(**kwargs)
         context['contas'] = Conta.objects.filter(usuario=self.request.user).order_by('id')
         """for conta in context['contas']:
