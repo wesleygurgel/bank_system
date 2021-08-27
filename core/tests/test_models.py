@@ -20,7 +20,7 @@ class TestModels(TestCase):
 
         self.poupanca2 = model.ContaPoupanca.objects.create(
             usuario=self.user,
-            proprietario='Hilton Kevin',
+            proprietario='Hilton Kevin Carvalho',
             credito=200,
             saldo=1200,
             tipo='Conta Poupança',
