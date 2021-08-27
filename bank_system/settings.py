@@ -82,20 +82,21 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
     }
 }"""
 
+# DB LOCAL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bank_system',
-        'USER': 'postgres',
+        'NAME': 'DEMO_TEST',
+        'USER': 'wesley',
         'PASSWORD': '71txkq',
         'HOST': 'localhost',
         'PORT': '5432'
     }
 }
 
-DATABASES = {
-    'default': dj_database_url.config()
-}
+# DB EM PRODUÇÃO
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
