@@ -3,7 +3,7 @@ from django.urls import reverse, resolve
 import core.views as views
 
 
-class TestsUrl(SimpleTestCase):
+class TestsUrls(SimpleTestCase):
 
     def tests_index_url_resolves(self):
         url = reverse('index')
