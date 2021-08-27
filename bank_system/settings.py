@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-et9r#^7#y=by&u#^4q^)#xtnnh#uxq075l0%p7lp!o$dhj76!t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -81,7 +81,6 @@ WSGI_APPLICATION = 'bank_system.wsgi.application'
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }"""
-
 """DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

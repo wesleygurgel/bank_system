@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView, FormView
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
-from .models import Conta, ContaBonus, ContaPoupanca
+from .models import Conta
 from .forms import CadastrarForm, DepositoForm, TransferirForm, RenderJurosForm
 from django.contrib import messages
 

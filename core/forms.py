@@ -29,6 +29,8 @@ class CadastrarForm(forms.Form):
             print('Conta Bônus criada!')
 
         else:
+            if saldo < 0:
+                saldo = 0
             ContaPoupanca.objects.create(usuario=usuario, proprietario=proprietario, taxa_juros=0, credito=credito,
                                          saldo=saldo, tipo=tipo_cleaned)
             print('Conta Poupança Criada!')
@@ -57,6 +59,7 @@ class TransferirForm(forms.Form):
     valor_transferir = forms.FloatField(label='Valor')
 
     def transferir(self, conta):
+        apto = True
         numero_conta = self.cleaned_data['numero_conta']
         valor_transferir = self.cleaned_data['valor_transferir']
         conta_destino = Conta.objects.get(id=numero_conta)
@@ -70,8 +73,12 @@ class TransferirForm(forms.Form):
             conta_destino.contabonus.pontuacao += int(valor_transferir // 200)
             conta_destino.contabonus.save()
 
-        conta.saldo -= valor_transferir
-        conta_destino.saldo += valor_transferir
+        if conta.tipo == 'Conta Poupança' and conta.saldo - valor_transferir < 0:
+            apto = False
+
+        if apto:
+            conta.saldo -= valor_transferir
+            conta_destino.saldo += valor_transferir
 
         conta.save()
         conta_destino.save()
