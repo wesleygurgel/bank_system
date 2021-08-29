@@ -1,5 +1,5 @@
 from django.urls import path
-from django.views.generic import RedirectView
+# from django.views.generic import RedirectView
 
 from .views import IndexView, LoginView, ContaView, SubmitLoginView, CadastrarContaView, SubmitCadastrarContaView, \
     AlterarContaView, DeletarContaView, DepositarContaView, SubmitDepositarContaView, TransferirView, RenderJurosView

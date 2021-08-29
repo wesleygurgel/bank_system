@@ -1,0 +1,11 @@
+[run]
+omit =
+    *migrations*,
+    *tests*,
+    bank_system*,
+    venv_bank_system*,
+    core/templatetags/*,
+    manage.py,
+    core/apps.py,
+    core/admin.py,
+    core/__init__.py
