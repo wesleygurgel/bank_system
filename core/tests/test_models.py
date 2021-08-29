@@ -33,5 +33,16 @@ class TestModels(TestCase):
         saldo_novo = self.poupanca.saldo
 
         self.assertEquals(saldo_novo + 200, saldo_antigo)
+    
+    def test_create_bonus(self):
+        bonus = model.ContaBonus.objects.create(
+            usuario=self.user,
+            proprietario='Raul Souto',
+            credito=500,
+            saldo=2500,
+            tipo='Conta Bônus',
+            pontuacao=10
+        )
 
+        self.assertEquals(bonus.proprietario, 'Raul Souto')
 
