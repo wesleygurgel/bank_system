@@ -38,6 +38,10 @@ jobs:
       - name: Generate .zip from system packages
         run: |
           python -m zipfile -c bank bank_system/
+      - name: set github credentials
+        run: |
+          git config --global user.email "wesleygurgel27@gmail.com"
+          git config --global user.name "Wesley Gurgel"
       - name: check for changes
         run: |
           git status
