@@ -26,7 +26,7 @@ jobs:
       - name: Lint with flake8
         run: |
           pip install flake8
-          flake8 --exclude .git, bank_system/commit-msg.py, bank_system/core/migrations*, *tests*, bank_system*, core/templatetags/*, manage.py, core/apps.py, core/admin.py, core/__init__.py
+          flake8 --exclude .git, .commit-msg.py, .core/migrations*, *tests*, bank_system*, core/templatetags/*, manage.py, core/apps.py, core/admin.py, core/__init__.py
       - name: Coverage report
         run: |
           pip install coverage
