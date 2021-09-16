@@ -26,3 +26,9 @@ jobs:
       - name: Django Testing
         run: |
           python3 manage.py test
+      - name: Reference commit-msg.py
+        run: |
+          pwd
+          cd .git/hooks/
+          pwd
+          ln -s ~bank_system/commit-msg.py ./commit-msg
