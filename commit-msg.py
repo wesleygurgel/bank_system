@@ -10,7 +10,7 @@ def main():
             if not line_valid(line):
                 print(
                     'Por favor, digite uma mensagem de commit respeitando o padrão\nExemplo:  fix(texto_qualquer): my '
-                    'changes are this')
+                    'changes are this\nAtente para o limite de 50 caracteres na descrição!')
                 sys.exit(1)
             else:
                 print('Commit realizado respeitando o padrão!')
