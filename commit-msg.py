@@ -5,6 +5,7 @@ import sys, re, getpass
 rules = """
 # Por favor, digite uma mensagem de commit respeitando o padrão!
 # Exemplo: feat(done_something): created gambiarra: feature/SW-2820
+
 # Atente para:
 #   - Usar apenas letras minúsculas, excessão para o numero do card -> (SW-2820).
 #   - Não usar espaços em excesso.
@@ -20,7 +21,7 @@ def main():
                 print(rules)
                 sys.exit(1)
             else:
-                print(f'Commit realizado respeitando o padrão!\nVocê é o cara {getpass.getuser()}')
+                print(f'Commit realizado respeitando o padrão! Você é o cara {getpass.getuser()}!')
                 sys.exit(0)
 
 
