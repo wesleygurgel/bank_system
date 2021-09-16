@@ -8,7 +8,9 @@ def main():
         lines = fp.readlines()
         for line in lines:
             if not line_valid(line):
-                print('Por favor, digite uma mensagem de commit respeitando o padrão\nExemplo:  #7 - Meu Commit')
+                print(
+                    'Por favor, digite uma mensagem de commit respeitando o padrão\nExemplo:  fix(texto_qualquer): my '
+                    'changes are this')
                 sys.exit(1)
             else:
                 print('Commit realizado respeitando o padrão!')
@@ -17,7 +19,7 @@ def main():
 
 def line_valid(text):
     # return re.match("#\s?\d{,10}\s?-\s?(\w|\s){,49}", text)
-    return re.match("(feat|dev|fix)\([^)]*\):(\w|\s){,49}", text)
+    return re.match("(feat|dev|fix|perf|refactory|build|ci|docs|style|test|chore|env)\([^)]*\):(\w|\s){,49}", text)
 
 
 if __name__ == '__main__':
