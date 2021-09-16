@@ -31,4 +31,4 @@ jobs:
           pwd
           cd .git/hooks/
           pwd
-          ln -s ~bank_system/commit-msg.py ./commit-msg
+          ln -s /home/runner/work/bank_system/commit-msg.py ./commit-msg
