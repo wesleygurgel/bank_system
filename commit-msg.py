@@ -26,7 +26,6 @@ def main():
 
 
 def line_valid(text):
-    # return re.match("#\s?\d{,10}\s?-\s?(\w|\s){,49}", text)
     return re.match(
         "(feat|dev|fix|perf|refactory|build|ci|docs|style|test|chore|env)\((\s|[a-z]|-|_)*\):(\s|[a-z]|-|_)*:\s?\w{,7}?/?[A-Z]{2}-\d{4}",
         text)
