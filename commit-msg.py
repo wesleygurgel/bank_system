@@ -17,12 +17,13 @@ def main():
     with open(sys.argv[1], "r") as fp:
         lines = fp.readlines()
         for line in lines:
+            print(line)
             if not line_valid(line):
                 print(rules)
                 sys.exit(1)
             else:
                 print(f'Commit realizado respeitando o padrão! Você é o cara {getpass.getuser()}!')
-                sys.exit(0)
+                sys.exit(1)
 
 
 def line_valid(text):
